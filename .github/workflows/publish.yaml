@@ -1,4 +1,5 @@
 name: Release
+
 on:
   push:
     branches:
@@ -6,17 +7,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-steps:
-  - uses: actions/checkout@v2
-    with:
-      persist-credentials: false
-  - uses: actions/setup-node@v3
-    with:
-      node-version: "16.x"
-      cache: 'yarn'
-  - run: yarn install
-  - run: yarn build
-  - run: yarn semantic-release
-    env:
-      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+      - run: yarn install
+      - run: yarn build
+      - run: yarn semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
