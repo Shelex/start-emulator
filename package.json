@@ -1,0 +1,75 @@
+{
+    "name": "start-emulator",
+    "version": "1.0.0",
+    "main": ".tsbuild/index.js",
+    "license": "Apache-2.0",
+    "type": "module",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Shelex/start-emulator"
+    },
+    "author": {
+        "name": "Oleksandr Shevtsov",
+        "email": "ovr.shevtsov@gmail.com"
+    },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/"
+    },
+    "bin": {
+        "start-emulator": "cli/index.js"
+    },
+    "scripts": {
+        "start-emulator": "ts-node --esm cli/index.ts",
+        "format": "prettier --write \"**/*.ts\" \"**/*.js\"",
+        "lint": "yarn eslint --fix --ext .ts,.js",
+        "build": "yarn rimraf .tsbuild && yarn tsc && yarn prepublishOnly",
+        "prepublishOnly": "cp package.json .tsbuild && cp yarn.lock .tsbuild"
+    },
+    "dependencies": {
+        "@commander-js/extra-typings": "10.0.3",
+        "chalk": "5.2.0",
+        "commander": "10.0.1",
+        "conf": "11.0.1",
+        "inquirer": "9.2.6",
+        "update-notifier": "6.0.2"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "17.6.3",
+        "@commitlint/config-conventional": "17.6.3",
+        "@semantic-release/changelog": "^6.0.3",
+        "@semantic-release/git": "^10.0.1",
+        "@types/chalk": "2.2.0",
+        "@types/conf": "3.0.0",
+        "@types/inquirer": "9.0.3",
+        "@types/node": "18.15.11",
+        "@types/update-notifier": "6.0.4",
+        "eslint": "8.41.0",
+        "eslint-config-prettier": "8.8.0",
+        "eslint-plugin-prettier": "4.2.1",
+        "husky": "8.0.3",
+        "prettier": "2.8.8",
+        "rimraf": "5.0.1",
+        "semantic-release": "^21.0.2",
+        "ts-node": "10.9.1",
+        "typescript": "4.9.5"
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+    },
+    "release": {
+        "plugins": [
+            "@semantic-release/release-notes-generator",
+            "@semantic-release/changelog",
+            "@semantic-release/npm",
+            "@semantic-release/git",
+            "@semantic-release/github"
+        ]
+    }
+}

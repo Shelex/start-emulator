@@ -1,0 +1,7 @@
+# OS stuff
+/.idea
+.DS_Store
+
+# Node stuff
+node_modules
+.tsbuild
